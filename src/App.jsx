@@ -3,7 +3,7 @@ import Search from './components/search'
 import Loader from './components/Loader';
 import MovieCard from './components/MovieCard';
 import { useDebounce } from 'react-use';
-import { searchCount, trendingMovies } from './appwrite';
+import { getTrendingMovies, searchCount } from './appwrite';
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -21,7 +21,7 @@ const App = () => {
   const[movies, setMovies] = useState([]);
   const[loading, setLoading] = useState(false);
   const[debounceTerm, setDebounceTerm] = useState('');
-  const[trending, setTrending] = useState([]);
+  const[trendingMovies, setTrendingMovies] = useState([]);
 
   useDebounce (() => setDebounceTerm(search), 1000, [search]);
 
@@ -52,18 +52,22 @@ const App = () => {
     }
   }
 
-  const getTrendingMovies = async() => {
+  const loadTrendingMovies = async() => {
     try {
-      const trendy = await trendingMovies();
-      setTrending(trendy);
+      const movies = await getTrendingMovies();
+      setTrendingMovies(movies);
     } catch(error) {
-      console.log(`Error fetching trending movies ${error}`)
+      console.error(`Error fetching trending movies ${error}`)
     }
   }
 
   useEffect (() => {
     fetchMovies(debounceTerm);
   }, [debounceTerm]);
+
+  useEffect (() => {
+    loadTrendingMovies();
+  }, []);
 
   return (
     <main>
@@ -75,8 +79,24 @@ const App = () => {
           <Search search = {search} setSearch = {setSearch}/>
         </header>
 
+        {trendingMovies.length > 0 && (
+           <section className = "trending">
+            <h2>Trending movies</h2>
+            <ul>
+              {trendingMovies.map((movie, index) => (
+                <li key={movie.$id}>
+                  <p>{index + 1}</p>
+                  <img src={movie.poster_url} alt={movie.title} />
+                </li>
+
+              ))}
+            </ul>
+
+           </section>
+        )}
+
         <section className = "all-movies">
-          <h2 className = 'mt = [50px]'> All Movies </h2>
+          <h2> All Movies </h2>
 
           {loading ? (
             <Loader />
