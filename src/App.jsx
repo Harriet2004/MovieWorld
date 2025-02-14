@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Search from './components/search'
+import Loader from './components/Loader';
+import MovieCard from './components/MovieCard';
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -37,7 +39,7 @@ const App = () => {
     catch (error) {
       setError('Error fetching the movies, please try again later.');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -56,7 +58,20 @@ const App = () => {
         </header>
 
         <section className = "all-movies">
-          <h2> All Movies </h2>
+          <h2 className = 'mt = [50px]'> All Movies </h2>
+
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <p className = 'text-red-50'>{error}</p>
+          ) : (
+            <ul>
+              {movies.map((movie) => (
+                <MovieCard key = {movie.id} movie = {movie}/>
+              ))}
+            </ul>
+          )}
+
         </section>
       </div>
 
