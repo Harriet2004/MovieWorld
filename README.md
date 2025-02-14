@@ -29,3 +29,20 @@ Please make sure that you have the following installed:
 -  Clone this repository to your local machine:
    ```bash
    git clone https://github.com/yourusername/MovieWorld.git
+   cd MovieWorld
+- Install the project dependencies:
+  ```bash
+  npm install
+- Create a file named .env.local in the root directory and add the following:
+  ```bash
+  VITE_IMDB_API_KEY=
+  VITE_APPWRITE_PROJECT_ID=
+  VITE_APPWRITE_DATABASE_ID=
+  VITE_APPWRITE_COLLECTION_ID=
+
+  Replace the values with your actual TheMovieDatabase API and Appwrite credentials. You can get these credentials by signing up on the TheMovieDatabase and creating a new project        on the Appwrite
+  
+- Running the project
+  ```bash
+  npm run dev
+- Open http://localhost:5173 (or any other link that appears) to view your project
