@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Search from './components/search'
 
 const App = () => {
-  const[search, setSearch] = useState('Hi');
+  const[search, setSearch] = useState('');
 
   return (
     <main>
