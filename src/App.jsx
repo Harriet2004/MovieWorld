@@ -13,6 +13,17 @@ const API_OPTIONS = {
 
 const App = () => {
   const[search, setSearch] = useState('');
+  const[error, setError] = useState('');
+
+  const fetchMovies = async() => {
+    try {
+  
+    }
+    catch (error) {
+      console.log(`Error getting the movies: ${error}`);
+      setError('Error fetching the movies, please try again later.');
+    }
+  }
 
   return (
     <main>
@@ -21,9 +32,13 @@ const App = () => {
         <header>
           <img src = "./hero-img.png"></img>
           <h1> Find <span className = "text-gradient">Movies</span> Without A Hassle </h1>
+          <Search search = {search} setSearch = {setSearch}/>
         </header>
 
-        <Search search = {search} setSearch = {setSearch}/>
+        <section className = "all-movies">
+          <h2> All Movies </h2>
+          {error && <p>{error}</p>}
+        </section>
       </div>
 
     </main>
