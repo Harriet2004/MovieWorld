@@ -17,13 +17,24 @@ const App = () => {
 
   const fetchMovies = async() => {
     try {
-  
+      const endpoint = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+      const response = await fetch(endpoint, API_OPTIONS);
+      if (!response.ok) {
+        throw new Error('Error: Failed to fetch movies');
+      }
+      const data = await response.json(); 
+      if (data.Response === 'False') {
+        setError(data.Error || 'Failed to fetch movies');
+      }
     }
     catch (error) {
-      console.log(`Error getting the movies: ${error}`);
       setError('Error fetching the movies, please try again later.');
     }
   }
+
+  useEffect (() => {
+    fetchMovies();
+  }, []);
 
   return (
     <main>
