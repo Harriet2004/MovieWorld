@@ -1,36 +1,22 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-const Card = ({title}) => {
-  const [count, setCount] = useState(0);
-  const [loved, setLoved] = useState(false);
-
-  useEffect(() => {
-    console.log(`${title} has been liked: ${loved}`)
-  }, [loved]);
-
-  return ( 
-    <div className = 'card' onClick = {() => setCount((prevState) => prevState + 1)}>
-    <h2>{title} <br /> {count ? count : null}</h2>
-    
-    <button onClick = {() => setLoved(!loved)}>
-      {loved ? "❤️" : "🤍"}
-    </button>
-    
-    </div>
-  )
-}
+import React, { useState } from 'react'
+import Search from './components/search'
 
 const App = () => {
+  const[search, setSearch] = useState('Hi');
 
   return (
-    <div className = 'card-contain'>
-    <Card title = "Die with a smile" />
-    <Card title = "APT" />
-    <Card title = "Old Town Road" />
-    </div>
+    <main>
+      <div className = "pattern" />
+      <div className = "wrapper">
+        <header>
+          <img src = "./hero-img.png"></img>
+          <h1> Find <span className = "text-gradient">Movies</span> Without A Hassle </h1>
+        </header>
+
+        <Search search = {search} setSearch = {setSearch}/>
+      </div>
+
+    </main>
   )
 }
 
