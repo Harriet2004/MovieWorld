@@ -40,7 +40,7 @@ Please make sure that you have the following installed:
   VITE_APPWRITE_DATABASE_ID=
   VITE_APPWRITE_COLLECTION_ID=
 
-  Replace the values with your actual TheMovieDatabase API and Appwrite credentials. You can get these credentials by signing up on the TheMovieDatabase and creating a new project        on the Appwrite
+- Replace the values with your actual TheMovieDatabase API and Appwrite credentials. You can get these credentials by signing up on the TheMovieDatabase and creating a new project        on the Appwrite
   
 - Running the project
   ```bash
