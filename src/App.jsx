@@ -4,7 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 const Card = ({title}) => {
-  return <h2>{title}</h2>
+  return <div className = 'card'>
+    <h2>{title}</h2>
+    </div>
 }
 
 const App = () => {

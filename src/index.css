@@ -24,3 +24,12 @@ h2 {
   max-width: 1024;
   margin: 0 auto;
 }
+
+.card {
+  background-color: gray;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px solid black;
+  min-height: 100px;
+}
