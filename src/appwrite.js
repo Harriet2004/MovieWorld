@@ -1,4 +1,4 @@
-import { Databases, ID, Query } from "appwrite";
+import { Client, Databases, ID, Query } from "appwrite";
 
 const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID; 
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID; 
@@ -22,4 +22,14 @@ export const searchCount = async (search, movie) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+export const trendingMovies = async () => {
+    try {
+        const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [Query.limit(5), Query.orderDesc('count')])
+        return result.documents;
+    } catch(error) {
+        console.log(error);
+    }
+    
 }
