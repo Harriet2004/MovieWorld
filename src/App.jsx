@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Search from './components/search'
 import Loader from './components/Loader';
 import MovieCard from './components/MovieCard';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import { useDebounce } from 'react-use';
 import { getTrendingMovies, searchCount } from './appwrite';
 
@@ -69,6 +73,16 @@ const App = () => {
     loadTrendingMovies();
   }, []);
 
+  const settings = {
+    dots: true,
+    speed: 800,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    infinite: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
   return (
     <main>
       <div className = "pattern" />
@@ -79,20 +93,19 @@ const App = () => {
         </header>
 
         {trendingMovies.length > 0 && (
-           <section className = "trending">
-            <h2>Trending movies</h2>
-            <ul>
+          <section className="trending">
+            <h2>Trending Movies</h2>
+            <Slider {...settings}>
               {trendingMovies.map((movie, index) => (
-                <li key={movie.$id}>
+                <div key={movie.$id} className="movie-slide">
                   <p>{index + 1}</p>
                   <img src={movie.poster_url} alt={movie.title} />
-                </li>
-
+                </div>
               ))}
-            </ul>
-
-           </section>
+            </Slider>
+          </section>
         )}
+
 
         <section className = "all-movies">
           <h2> All Movies </h2>
